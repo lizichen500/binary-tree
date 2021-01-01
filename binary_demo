@@ -1,0 +1,53 @@
+#include<iostream>
+
+struct Tree
+{
+	int root;
+	Tree* Rbranch;
+	Tree* Lbranch;
+
+};
+void setvalue(Tree *tree ) {
+	printf("input the number: ");
+	scanf_s("%d",&(tree->root));
+	fflush(stdin);
+	if (tree->root==0)
+	{
+		return;
+	}
+	else
+	{
+		tree->Rbranch = new Tree;
+		tree->Lbranch = new Tree;
+		printf("%d左树",tree->root);
+		setvalue(tree->Lbranch);
+		printf("%d右树", tree->root);
+		setvalue(tree->Rbranch);
+	}
+}
+void printvalue(Tree* tree) {
+	if (tree->root==0)
+	{
+		return;
+	}
+	else
+	{
+		printf("%d\n",tree->root);
+		//这个算法是左边的全部输出后，再右边的输出
+		printvalue(tree->Lbranch);
+		printvalue(tree->Rbranch);
+	}
+}
+
+
+
+int main() {
+	Tree* test = new Tree;
+	setvalue(test);
+	puts("赋值结束\n");
+	printvalue(test);
+
+
+
+	return 0;
+}
